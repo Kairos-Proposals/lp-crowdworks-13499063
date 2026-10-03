@@ -1,0 +1,656 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Kairos ご提案 | 大河内金属工業様 企業サイト制作（SWELL実装）</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Oswald:wght@400;500;600;700&family=Barlow+Condensed:wght@500;600;700&family=Noto+Sans+JP:wght@400;500;700;900&display=swap" rel="stylesheet">
+<style>
+  :root{
+    --steel-black:#1C2127;
+    --steel-dark:#2B323D;
+    --steel:#3A4150;
+    --metal-light:#8A94A3;
+    --paper:#ECEEF1;
+    --weld-orange:#D97B36;
+    --weld-light:#F4A94A;
+  }
+
+  *{box-sizing:border-box; margin:0; padding:0;}
+
+  html{scroll-behavior:smooth;}
+
+  body{
+    font-family:'Noto Sans JP', sans-serif;
+    color:var(--steel-black);
+    background:var(--paper);
+    line-height:1.85;
+    letter-spacing:0.02em;
+    overflow-x:hidden;
+  }
+
+  h1,h2,h3,.en-num{
+    font-family:'Oswald', sans-serif;
+    letter-spacing:0.04em;
+  }
+
+  a{color:inherit;}
+
+  img{max-width:100%; display:block;}
+
+  .container{
+    max-width:1080px;
+    margin:0 auto;
+    padding:0 24px;
+  }
+
+  /* ===== 共通：金属グリッド背景 ===== */
+  .metal-grid{
+    background-image:
+      linear-gradient(90deg, rgba(255,255,255,0.03) 1px, transparent 1px),
+      linear-gradient(0deg, rgba(255,255,255,0.03) 1px, transparent 1px);
+    background-size: 36px 36px;
+  }
+
+  /* ===== HERO ===== */
+  .hero{
+    position:relative;
+    background:
+      radial-gradient(circle at 85% 15%, rgba(217,123,54,0.35), transparent 45%),
+      linear-gradient(155deg, var(--steel-black) 0%, var(--steel-dark) 45%, var(--steel) 100%);
+    color:var(--paper);
+    padding:120px 0 140px;
+    overflow:hidden;
+  }
+
+  .hero::before{
+    content:"";
+    position:absolute;
+    inset:0;
+    background-image:
+      linear-gradient(90deg, rgba(255,255,255,0.04) 1px, transparent 1px),
+      linear-gradient(0deg, rgba(255,255,255,0.04) 1px, transparent 1px);
+    background-size: 48px 48px;
+    pointer-events:none;
+  }
+
+  .hero::after{
+    content:"";
+    position:absolute;
+    right:-120px;
+    top:-80px;
+    width:420px;
+    height:420px;
+    border:2px solid rgba(244,169,74,0.25);
+    border-radius:50%;
+    pointer-events:none;
+  }
+
+  .hero-inner{position:relative; z-index:2;}
+
+  .badge{
+    display:inline-flex;
+    align-items:center;
+    gap:10px;
+    font-family:'Barlow Condensed', sans-serif;
+    font-size:14px;
+    font-weight:600;
+    letter-spacing:0.22em;
+    color:var(--weld-light);
+    border:1px solid rgba(244,169,74,0.5);
+    padding:7px 18px;
+    border-radius:999px;
+    margin-bottom:32px;
+    background:rgba(217,123,54,0.08);
+  }
+  .badge::before{
+    content:"";
+    width:8px; height:8px;
+    background:var(--weld-orange);
+    border-radius:50%;
+    box-shadow:0 0 10px 2px rgba(244,169,74,0.7);
+  }
+
+  .hero h1{
+    font-size:clamp(32px, 5.2vw, 56px);
+    font-weight:700;
+    line-height:1.4;
+    margin-bottom:24px;
+  }
+  .hero h1 span{
+    color:var(--weld-light);
+  }
+
+  .hero p.lead{
+    font-size:16px;
+    color:rgba(236,238,241,0.78);
+    max-width:620px;
+    margin-bottom:44px;
+  }
+
+  .hero-meta{
+    display:flex;
+    flex-wrap:wrap;
+    gap:28px;
+    font-family:'Barlow Condensed', sans-serif;
+    font-size:15px;
+    color:var(--metal-light);
+  }
+  .hero-meta div{
+    border-left:2px solid var(--weld-orange);
+    padding-left:14px;
+  }
+  .hero-meta strong{
+    display:block;
+    font-size:13px;
+    color:var(--weld-light);
+    font-weight:600;
+    letter-spacing:0.1em;
+    margin-bottom:2px;
+  }
+
+  /* 斜めの区切り */
+  .slant-divider{
+    position:relative;
+    height:60px;
+    background:var(--paper);
+  }
+  .slant-divider svg{display:block; width:100%; height:100%;}
+
+  /* ===== SECTION 共通見出し ===== */
+  .section{padding:100px 0;}
+  .section-tag{
+    font-family:'Barlow Condensed', sans-serif;
+    font-size:14px;
+    font-weight:700;
+    letter-spacing:0.3em;
+    color:var(--weld-orange);
+    margin-bottom:14px;
+  }
+  .section h2{
+    font-size:clamp(26px, 3.4vw, 38px);
+    font-weight:600;
+    color:var(--steel-black);
+    margin-bottom:18px;
+  }
+  .section .sub{
+    color:var(--steel);
+    font-size:15.5px;
+    max-width:680px;
+    margin-bottom:56px;
+  }
+
+  /* ===== 理解セクション ===== */
+  .understand{
+    background:#fff;
+    position:relative;
+  }
+  .understand-grid{
+    display:grid;
+    grid-template-columns:1fr 1fr;
+    gap:48px;
+    align-items:start;
+  }
+  .plate{
+    background:linear-gradient(160deg, #f6f7f9, #e7e9ed);
+    border:1px solid #d8dce2;
+    border-radius:6px;
+    padding:36px;
+    position:relative;
+  }
+  .plate::before, .plate::after{
+    content:"";
+    position:absolute;
+    width:10px; height:10px;
+    border-radius:50%;
+    background:#c7cdd6;
+    box-shadow:inset 0 1px 2px rgba(0,0,0,0.3);
+  }
+  .plate::before{top:14px; left:14px;}
+  .plate::after{bottom:14px; right:14px;}
+  .plate h3{
+    font-size:18px;
+    margin-bottom:16px;
+    color:var(--steel-black);
+  }
+  .plate p{
+    font-size:14.5px;
+    color:var(--steel);
+  }
+  .understand-list{
+    display:flex;
+    flex-direction:column;
+    gap:18px;
+  }
+  .understand-item{
+    display:flex;
+    gap:16px;
+    align-items:flex-start;
+    padding-bottom:18px;
+    border-bottom:1px dashed #d8dce2;
+  }
+  .understand-item:last-child{border-bottom:none;}
+  .u-num{
+    font-family:'Barlow Condensed', sans-serif;
+    font-size:28px;
+    font-weight:700;
+    color:var(--metal-light);
+    line-height:1;
+    min-width:42px;
+  }
+  .understand-item h4{
+    font-size:15.5px;
+    margin-bottom:6px;
+    color:var(--steel-black);
+  }
+  .understand-item p{
+    font-size:14px;
+    color:var(--steel);
+  }
+
+  /* ===== 価値提供 ===== */
+  .value{
+    background:
+      linear-gradient(180deg, var(--steel-black), var(--steel-dark));
+    color:var(--paper);
+    position:relative;
+  }
+  .value::before{
+    content:"";
+    position:absolute;
+    inset:0;
+    background-image:
+      linear-gradient(90deg, rgba(255,255,255,0.03) 1px, transparent 1px),
+      linear-gradient(0deg, rgba(255,255,255,0.03) 1px, transparent 1px);
+    background-size:40px 40px;
+    pointer-events:none;
+  }
+  .value .container{position:relative; z-index:2;}
+  .value .section-tag{color:var(--weld-light);}
+  .value h2{color:#fff;}
+  .value .sub{color:var(--metal-light);}
+
+  .value-grid{
+    display:grid;
+    grid-template-columns:repeat(3, 1fr);
+    gap:24px;
+  }
+  .value-card{
+    background:rgba(255,255,255,0.04);
+    border:1px solid rgba(255,255,255,0.08);
+    border-radius:8px;
+    padding:30px 26px;
+    position:relative;
+    overflow:hidden;
+    transition:transform .3s ease, border-color .3s ease;
+  }
+  .value-card:hover{
+    transform:translateY(-4px);
+    border-color:rgba(244,169,74,0.5);
+  }
+  .value-card::before{
+    content:"";
+    position:absolute;
+    top:-40px; right:-40px;
+    width:100px; height:100px;
+    background:radial-gradient(circle, rgba(217,123,54,0.35), transparent 70%);
+  }
+  .v-icon{
+    width:44px; height:44px;
+    border:2px solid var(--weld-orange);
+    border-radius:50%;
+    display:flex; align-items:center; justify-content:center;
+    font-family:'Barlow Condensed', sans-serif;
+    font-weight:700;
+    font-size:18px;
+    color:var(--weld-light);
+    margin-bottom:20px;
+  }
+  .value-card h3{
+    font-size:17px;
+    font-weight:600;
+    margin-bottom:10px;
+    color:#fff;
+  }
+  .value-card p{
+    font-size:13.8px;
+    color:var(--metal-light);
+  }
+  .value-grid .value-card:nth-child(4),
+  .value-grid .value-card:nth-child(5){
+    grid-column:span 1;
+  }
+
+  /* ===== 進め方 ===== */
+  .process{background:var(--paper);}
+  .timeline{
+    position:relative;
+    margin-top:20px;
+  }
+  .timeline::before{
+    content:"";
+    position:absolute;
+    left:21px;
+    top:10px;
+    bottom:10px;
+    width:2px;
+    background:repeating-linear-gradient(to bottom, var(--weld-orange) 0 8px, transparent 8px 16px);
+  }
+  .t-item{
+    position:relative;
+    padding-left:64px;
+    margin-bottom:44px;
+  }
+  .t-item:last-child{margin-bottom:0;}
+  .t-dot{
+    position:absolute;
+    left:0; top:0;
+    width:44px; height:44px;
+    border-radius:50%;
+    background:var(--steel-black);
+    color:var(--weld-light);
+    display:flex; align-items:center; justify-content:center;
+    font-family:'Barlow Condensed', sans-serif;
+    font-weight:700;
+    font-size:16px;
+    border:3px solid var(--weld-orange);
+  }
+  .t-item h4{
+    font-size:16.5px;
+    color:var(--steel-black);
+    margin-bottom:8px;
+  }
+  .t-item .t-day{
+    font-family:'Barlow Condensed', sans-serif;
+    font-size:13px;
+    color:var(--weld-orange);
+    font-weight:700;
+    letter-spacing:0.08em;
+    margin-bottom:6px;
+    display:block;
+  }
+  .t-item p{
+    font-size:14px;
+    color:var(--steel);
+    max-width:600px;
+  }
+
+  .policy-box{
+    margin-top:60px;
+    background:#fff;
+    border:1px solid #dadfe5;
+    border-left:4px solid var(--weld-orange);
+    border-radius:4px;
+    padding:28px 32px;
+  }
+  .policy-box h4{
+    font-size:15px;
+    margin-bottom:10px;
+    color:var(--steel-black);
+  }
+  .policy-box p{font-size:13.8px; color:var(--steel);}
+
+  /* ===== クロージング ===== */
+  .closing{
+    position:relative;
+    background:linear-gradient(135deg, var(--steel-dark), var(--steel-black) 60%);
+    color:var(--paper);
+    padding:110px 0;
+    text-align:center;
+    overflow:hidden;
+  }
+  .closing::before{
+    content:"";
+    position:absolute;
+    left:50%; top:50%;
+    width:900px; height:900px;
+    transform:translate(-50%,-50%);
+    background:radial-gradient(circle, rgba(217,123,54,0.18), transparent 60%);
+  }
+  .closing-inner{position:relative; z-index:2;}
+  .closing h2{
+    color:#fff;
+    font-size:clamp(24px,3.6vw,36px);
+    margin-bottom:20px;
+  }
+  .closing p{
+    color:var(--metal-light);
+    max-width:560px;
+    margin:0 auto 40px;
+    font-size:15px;
+  }
+  .cta-btn{
+    display:inline-block;
+    background:linear-gradient(120deg, var(--weld-orange), var(--weld-light));
+    color:var(--steel-black);
+    font-family:'Oswald', sans-serif;
+    font-weight:600;
+    font-size:16px;
+    letter-spacing:0.05em;
+    padding:18px 48px;
+    border-radius:4px;
+    text-decoration:none;
+    box-shadow:0 10px 30px rgba(217,123,54,0.35);
+    transition:transform .25s ease;
+  }
+  .cta-btn:hover{transform:translateY(-3px);}
+
+  .closing-sub{
+    margin-top:36px;
+    font-size:12.5px;
+    color:var(--metal-light);
+    letter-spacing:0.04em;
+  }
+
+  footer{
+    background:var(--steel-black);
+    color:var(--metal-light);
+    text-align:center;
+    padding:26px 0;
+    font-size:12.5px;
+    letter-spacing:0.05em;
+  }
+
+  /* ===== レスポンシブ ===== */
+  @media (max-width:860px){
+    .understand-grid{grid-template-columns:1fr;}
+    .value-grid{grid-template-columns:repeat(2,1fr);}
+  }
+  @media (max-width:600px){
+    .section{padding:70px 0;}
+    .hero{padding:90px 0 100px;}
+    .value-grid{grid-template-columns:1fr;}
+    .hero-meta{gap:18px;}
+    .policy-box{padding:22px 20px;}
+  }
+</style>
+</head>
+<body>
+
+  <!-- ===== HERO ===== -->
+  <section class="hero">
+    <div class="container hero-inner">
+      <span class="badge">KAIROS PROPOSAL</span>
+      <h1>設計と原稿はすでにある。<br>あとは、<span>精度</span>をもって形にするだけ。</h1>
+      <p class="lead">
+        大河内金属工業様の企業サイト制作案件を拝見し、Kairos（Web制作・システム開発チーム）よりご提案いたします。
+        構成・原稿・参考デザインが揃った今回の案件を、SWELLの標準機能を軸に、過不足のない実装でお応えします。
+      </p>
+      <div class="hero-meta">
+        <div><strong>THEME</strong>WordPress + SWELL</div>
+        <div><strong>SCOPE</strong>TOP + 固定4ページ</div>
+        <div><strong>SCHEDULE</strong>契約後 約14日</div>
+        <div><strong>BUDGET</strong>50,000〜100,000円</div>
+      </div>
+    </div>
+  </section>
+
+  <div class="slant-divider">
+    <svg viewBox="0 0 1000 60" preserveAspectRatio="none">
+      <polygon points="0,60 1000,0 1000,60" fill="#ECEEF1"></polygon>
+    </svg>
+  </div>
+
+  <!-- ===== 理解セクション ===== -->
+  <section class="section understand">
+    <div class="container">
+      <div class="section-tag">UNDERSTANDING THE PROJECT</div>
+      <h2>「実装中心」という言葉の意味を、正しく受け止めています。</h2>
+      <p class="sub">
+        ゼロから企画する案件ではなく、整理された設計図をもとに、現場で使われ続けるサイトへ丁寧に落とし込む案件だと理解しています。
+        だからこそ重要なのは、派手さではなく「正確さ」と「保守のしやすさ」です。
+      </p>
+
+      <div class="understand-grid">
+        <div class="plate">
+          <h3>金属加工の現場を伝えるサイトだからこそ</h3>
+          <p>
+            製品・加工対応・強み・設備・品質管理・採用情報――情報量の多い構成は、
+            製造業の信頼性をそのまま映す鏡だと考えています。
+            余白と文字サイズの設計ひとつで「読みやすさ」と「信頼感」は大きく変わります。
+            参考デザインの意図を汲み取りながら、SWELLの標準ブロックで再現可能な形に丁寧に変換します。
+          </p>
+        </div>
+
+        <div class="understand-list">
+          <div class="understand-item">
+            <div class="u-num">01</div>
+            <div>
+              <h4>標準ブロック優先、カスタムは必要最小限</h4>
+              <p>見出し・カード・FAQ・CTA等はSWELLの標準機能で構築し、再現が難しい箇所のみHTML／CSSで補完します。</p>
+            </div>
+          </div>
+          <div class="understand-item">
+            <div class="u-num">02</div>
+            <div>
+              <h4>CSSの置き場所を分離管理</h4>
+              <p>固定ページ専用CSSは該当ページ内に、共通CSSはカスタマイザー側に記載し、後からの保守・更新を容易にします。</p>
+            </div>
+          </div>
+          <div class="understand-item">
+            <div class="u-num">03</div>
+            <div>
+              <h4>1ページずつ確認しながら進行</h4>
+              <p>TOP確定後に下層ページへ進む流れを徹底し、手戻りと認識齟齬を最小限に抑えます。</p>
+            </div>
+          </div>
+          <div class="understand-item">
+            <div class="u-num">04</div>
+            <div>
+              <h4>実績非公開・守秘義務を厳守</h4>
+              <p>検証環境、原稿、画像、クライアント名を含め、第三者への公開・共有は一切行いません。</p>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ===== 価値提供 ===== -->
+  <section class="section value">
+    <div class="container">
+      <div class="section-tag">WHAT KAIROS CAN DELIVER</div>
+      <h2>Kairosが提供できる価値</h2>
+      <p class="sub">
+        「作れる」ではなく「運用できる形で仕上げられる」ことを重視しています。
+        金属加工という専門性の高い業種のサイトを、過不足なく、丁寧に実装します。
+      </p>
+
+      <div class="value-grid">
+        <div class="value-card">
+          <div class="v-icon">01</div>
+          <h3>SWELL実装の精密な再現力</h3>
+          <p>参考デザイン画像のレイアウト・配色・余白の意図を読み取り、標準ブロックの組み合わせで忠実に再現します。</p>
+        </div>
+        <div class="value-card">
+          <div class="v-icon">02</div>
+          <h3>情報量の多いページの整理力</h3>
+          <p>製品・設備・品質管理など情報の多いページも、見出し階層と余白設計で読みやすく整理します。</p>
+        </div>
+        <div class="value-card">
+          <div class="v-icon">03</div>
+          <h3>スマホでの読みやすさへのこだわり</h3>
+          <p>PCデザインの単純縮小ではなく、スマホ閲覧時の文字量・タップ領域・改行位置まで個別に調整します。</p>
+        </div>
+        <div class="value-card">
+          <div class="v-icon">04</div>
+          <h3>保守しやすいコード設計</h3>
+          <p>CSSの記述場所を用途別に分離し、テーマファイルは直接編集しない前提で、更新時の事故リスクを抑えます。</p>
+        </div>
+        <div class="value-card">
+          <div class="v-icon">05</div>
+          <h3>不足ビジュアルへのAI補助対応</h3>
+          <p>支給素材で足りない箇所は、素材写真の選定やChatGPT等を用いたAI画像作成でトーンを揃えて補完します。</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ===== 進め方 ===== -->
+  <section class="section process">
+    <div class="container">
+      <div class="section-tag">HOW WE WORK</div>
+      <h2>進め方・スケジュールイメージ</h2>
+      <p class="sub">
+        ご要望どおり、全ページ一括ではなく1ページずつ確認しながら進行します。目安スケジュールは以下の通りです。
+      </p>
+
+      <div class="timeline">
+        <div class="t-item">
+          <div class="t-dot">1</div>
+          <span class="t-day">DAY 1 - 2</span>
+          <h4>環境確認・構成／原稿・参考デザインの読み込み</h4>
+          <p>支給いただく検証環境、構成、原稿、参考デザイン画像、導線設計を確認し、実装方針をすり合わせます。</p>
+        </div>
+        <div class="t-item">
+          <div class="t-dot">2</div>
+          <span class="t-day">DAY 3 - 5</span>
+          <h4>TOPページ初稿</h4>
+          <p>情報量の多いTOPページから着手。SWELL標準ブロック中心に、必要箇所のみカスタムHTML／CSSで補完した初稿を提出します。</p>
+        </div>
+        <div class="t-item">
+          <div class="t-dot">3</div>
+          <span class="t-day">DAY 6 - 12</span>
+          <h4>固定ページを順次制作</h4>
+          <p>TOP確定後、製品・加工対応／強み・設備／品質管理体制／採用情報の順に、1ページずつ確認・修正を重ねて仕上げます。</p>
+        </div>
+        <div class="t-item">
+          <div class="t-dot">4</div>
+          <span class="t-day">DAY 13 - 14</span>
+          <h4>全体統一感の最終確認・納品</h4>
+          <p>余白・配色・見出し・ボタン・CTAの統一感を全ページ横断でチェックし、表示確認を経て納品します。</p>
+        </div>
+      </div>
+
+      <div class="policy-box">
+        <h4>軽微な修正と範囲外対応について</h4>
+        <p>
+          各ページ初稿提出後の軽微な修正は報酬内で対応いたします。大幅な作り直し・構成変更・新規ページ追加・大量の原稿差し替えなど、
+          当初範囲を超える内容については、事前にご相談のうえ別途お見積りいたします。
+        </p>
+      </div>
+    </div>
+  </section>
+
+  <!-- ===== クロージング ===== -->
+  <section class="closing">
+    <div class="container closing-inner">
+      <div class="section-tag" style="color:var(--weld-light);">NEXT STEP</div>
+      <h2>まずは一度、構成と参考デザインを拝見させてください。</h2>
+      <p>
+        SWELLでの制作実績、TOPページ初稿までの目安日数、全体納品までのスケジュールなど、
+        ご指定の確認事項と合わせて、具体的なご提案をお送りいたします。
+        実績非公開の条件についても問題なく対応いたします。
+      </p>
+      <a href="#" class="cta-btn">Kairosへ相談・見積りを依頼する</a>
+      <div class="closing-sub">WordPress / SWELL 制作チーム Kairos — 構成・原稿を、信頼感のある形へ。</div>
+    </div>
+  </section>
+
+  <footer>
+    &copy; Kairos — Web制作・システム開発チーム
+  </footer>
+
+</body>
+</html>
